@@ -3,6 +3,7 @@
 An online tic tac toe made using Node.js and WebSockets.
 
 [Play the online demo](https://aqueous-sierra-91697.herokuapp.com/)
+(open two tabs in you browser)
 
 ## How to build and run
 
