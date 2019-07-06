@@ -75,6 +75,7 @@ ws.onmessage = function(message) {
             
             case Events.GameTied:
                 infoEl.textContent = 'Tie!';
+                newGameEl.classList.remove('hidden');
                 isGameOver = true;
                 break;
             
