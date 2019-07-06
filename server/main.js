@@ -1,4 +1,4 @@
-import { Events } from '../shared';
+import { Events } from './shared';
 import Match from './match';
 
 const path = require('path');
@@ -8,7 +8,7 @@ const server = require('http').Server(app);
 const WebSocket = require('ws');
 const PORT = process.env.port || 8080;
 
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 server.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);

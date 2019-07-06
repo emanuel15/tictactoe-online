@@ -1,4 +1,4 @@
-import { DataStream, Events } from '../shared';
+import { DataStream, Events } from '../server/shared';
 
 let host = location.origin.replace(/^http/, 'ws');
 let ws = new WebSocket(host);

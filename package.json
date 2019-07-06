@@ -8,7 +8,9 @@
     "watch": "webpack --watch",
     "dev": "webpack",
     "prod": "webpack --mode production",
-    "start": "nodemon --exec babel-node server/main.js"
+    "startdev": "nodemon --exec babel-node server/main.js",
+    "start": "node dist/main.js",
+    "build": "babel server -d dist"
   },
   "author": "emanuel15",
   "license": "ISC",

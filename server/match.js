@@ -1,4 +1,4 @@
-import { DataStream, Values, Events } from '../shared';
+import { DataStream, Values, Events } from './shared';
 const { None, Cross, Circle, Tie } = Values;
 
 const winningPositions = [
