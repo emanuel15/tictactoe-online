@@ -4,10 +4,11 @@
   "description": "An online tic tac toe game",
   "private": true,
   "scripts": {
-    "watch": "webpack-dev-server --open",
+    "devserver": "webpack-dev-server --open",
+    "watch": "webpack --watch",
     "dev": "webpack",
-    "prod": "webpack --production",
-    "server": "nodemon --exec babel-node server/main.js"
+    "prod": "webpack --mode production",
+    "start": "nodemon --exec babel-node server/main.js"
   },
   "author": "emanuel15",
   "license": "ISC",
@@ -23,7 +24,7 @@
     "webpack-dev-server": "^3.4.1"
   },
   "dependencies": {
-    "isomorphic-ws": "^4.0.1",
+    "express": "^4.17.1",
     "uuid": "^3.3.2",
     "ws": "^7.0.0"
   }

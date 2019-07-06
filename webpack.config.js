@@ -9,7 +9,7 @@ module.exports = {
     },
     devServer: {
         contentBase: './dist',
-        publicPath: '/assets/',
+        publicPath: '/js/',
         watchContentBase: true,
         compress: true,
         port: 9000,

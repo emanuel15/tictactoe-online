@@ -1,10 +1,21 @@
 import { Events } from '../shared';
 import Match from './match';
 
+const path = require('path');
+const express = require('express');
+const app = express();
+const server = require('http').Server(app);
 const WebSocket = require('ws');
+const PORT = process.env.port || 8080;
+
+app.use(express.static(path.join(__dirname, '../dist')));
+
+server.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
+});
 
 const wss = new WebSocket.Server({
-    port: 8080
+    server: server
 });
 
 class MatchManager {

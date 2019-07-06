@@ -1,6 +1,7 @@
 import { DataStream, Events } from '../shared';
 
-let ws = new WebSocket('ws://localhost:8080');
+let host = location.origin.replace(/^http/, 'ws');
+let ws = new WebSocket(host);
 
 let infoEl = document.querySelector('#game-info');
 let boardEl = document.querySelector('#board');
@@ -14,17 +15,17 @@ let currentMark = null;
 let streams = new DataStream();
 
 ws.onopen = function onopen() {
-    console.log('Conectado');
-    infoEl.textContent = 'Aguardando por jogador...';
+    console.log('Connected');
+    infoEl.textContent = 'Searching for an opponent...';
 };
 
 ws.onclose = function close() {
-    console.log('Desconectado');
+    console.log('Disconnected');
 };
 
 ws.onerror = function error() {
-    console.log('Não foi possível conectar-se ao servidor');
-    infoEl.textContent = 'Não foi possível conectar-se ao servidor';
+    console.log('Failed to connect to the server');
+    infoEl.textContent = 'Failed to connect to the server';
 };
 
 ws.onmessage = function(message) {
@@ -44,10 +45,10 @@ ws.onmessage = function(message) {
                 var value = parseInt(stream[1]);
                 
                 if (currentMark == value) {
-                    infoEl.textContent = 'Sua vez!';
+                    infoEl.textContent = 'Your turn!';
                 }
                 else {
-                    infoEl.textContent = 'Vez do ' + (value == 1 ? 'X' : 'O');
+                    infoEl.textContent = `${(value == 1 ? 'X' : 'O')}'s turn!`;
                 }
                 break;
             
@@ -62,7 +63,7 @@ ws.onmessage = function(message) {
                 break;
             
             case Events.GameOver:
-                infoEl.textContent = (parseInt(stream[1]) == 1 ? 'X' : 'O') + ' venceu!';
+                infoEl.textContent = (parseInt(stream[1]) == 1 ? 'X' : 'O') + ' won!';
                 newGameEl.classList.remove('hidden');
                 isGameOver = true;
                 break;
@@ -73,13 +74,13 @@ ws.onmessage = function(message) {
                 break;
             
             case Events.GameTied:
-                infoEl.textContent = 'Empate!';
+                infoEl.textContent = 'Tie!';
                 isGameOver = true;
                 break;
             
             case Events.YouAre:
                 currentMark = parseInt(stream[1]);
-                yourMarkEl.textContent = `Você é o ${(currentMark == 1 ? 'X' : 'O')}`;
+                yourMarkEl.textContent = `You're the ${(currentMark == 1 ? 'X' : 'O')}`;
                 break;
             
             case Events.WinnerCells:
@@ -119,7 +120,7 @@ newGameEl.addEventListener('click', function(event) {
     boardEl.classList.add('hidden');
     yourMarkEl.classList.add('hidden');
     infoEl.classList.remove('text-right');
-    infoEl.textContent = 'Aguardando por jogador...';
+    infoEl.textContent = 'Searching for an opponent...';
     abandonInfo.classList.add('hidden');
 
     streams.output();
